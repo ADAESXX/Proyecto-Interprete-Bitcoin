@@ -12,10 +12,10 @@ public class ScriptResult {
     //mensaje que describe el resultado de la ejecución
     private final String mensaje;
     //pila final después de la ejecución del script
-    private final Deque<String> finalStack;
+    private final Deque<byte[]> finalStack;
 
     //Constructor
-    public ScriptResult(boolean exito, String mensaje, Deque<String> finalStack) {
+    public ScriptResult(boolean exito, String mensaje, Deque<byte[]> finalStack) {
         this.exito = exito;
         this.mensaje = mensaje;
         this.finalStack = finalStack;
@@ -31,7 +31,12 @@ public class ScriptResult {
         return mensaje;
     }
 
-    public Deque<String> getFinalStack() {
+    public Deque<byte[]> getFinalStack() {
         return finalStack;
+    }
+
+    @Override
+    public String toString(){
+        return exito ? "VALID" : "INVALID (" + mensaje + ")";
     }
 }
