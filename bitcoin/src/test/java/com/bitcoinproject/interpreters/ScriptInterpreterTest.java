@@ -1,6 +1,9 @@
 /**
  * @author Paola Mérida
  * Fecha: 12/02/2026
+ * Descripcción: Clase de prueba para el ScriptInterpreter, que verifica la ejecución de scripts simples, operaciones aritméticas y la funcionalidad de pop.
+ * 
+ * 
  */
 package com.bitcoinproject.interpreters;
 

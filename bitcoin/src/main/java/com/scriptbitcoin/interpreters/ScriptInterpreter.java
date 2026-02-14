@@ -11,9 +11,14 @@ import java.util.List;
 import com.scriptbitcoin.model.OpCode;
 import com.scriptbitcoin.model.Valor;
 import com.scriptbitcoin.model.ValorTipo;
-import com.scriptbitcoin.operations.*;
+import com.scriptbitcoin.operations.Crypto;
+import com.scriptbitcoin.operations.Firmas;
+import com.scriptbitcoin.operations.Literales;
+import com.scriptbitcoin.operations.Logic;
+import com.scriptbitcoin.operations.StackOperations;
 import com.scriptbitcoin.utils.TraceAplication;
 import com.scriptbitcoin.utils.Utiles;
+
 
 
 
@@ -70,21 +75,22 @@ public class ScriptInterpreter {
                 if (trace){
                     traceLogger.log(valor, stack);
                 }
-                // manejo de errores específicos para control de flujo, como IF sin ENDIF o ELSE sin IF
-                if(!stackcondicional.isEmpty()){
-                    return new ScriptResult(false, "Error: falta un OP_ENDIF para cerrar una rama condicional", stack);
-                }
-                if (stack.isEmpty()){
-                    return new ScriptResult(false, "Error: pila vacía", stack);
-                }
-                if (!Utiles.isTruthy(stack.peek())){
-                    return new ScriptResult(false, "Cima del stack falsa", stack);
-                }
-                // Si se llega al final del script sin errores, se devuelve un resultado exitoso con el estado final de la pila
-                return new ScriptResult(true, "Script ejecutado correctamente", stack);
-
             }
-        } catch (ExceptionsInterpreter e) {
+            // manejo de errores específicos para control de flujo, como IF sin ENDIF o ELSE sin IF
+            if(!stackcondicional.isEmpty()){
+                return new ScriptResult(false, "Error: falta un OP_ENDIF para cerrar una rama condicional", stack);
+            }
+            if (stack.isEmpty()){
+                return new ScriptResult(false, "Error: pila vacía", stack);
+            }
+            if (!Utiles.isTruthy(stack.peek())){
+                return new ScriptResult(false, "Cima del stack falsa", stack);
+            }
+            // Si se llega al final del script sin errores, se devuelve un resultado exitoso con el estado final de la pila
+            return new ScriptResult(true, "Script ejecutado correctamente", stack);
+
+        }
+         catch (ExceptionsInterpreter e) {
             if (trace) {
                 System.out.println("Error: " + e.getMessage());
 
@@ -178,62 +184,24 @@ public class ScriptInterpreter {
         switch (opCode) {
             //////////LITERALES///////////
             case OP_0:
-                stack.push(new byte[0]);
-                break;
             case OP_FALSE:
-                stack.push(new byte[0]);
-                break;
             case OP_1:
-                stack.push(Utiles.intToBytes(1));
-                break;
             case OP_2:
-                stack.push(Utiles.intToBytes(2));
-                break;
             case OP_3:
-                stack.push(Utiles.intToBytes(3));
-                break;
             case OP_4:
-                stack.push(Utiles.intToBytes(4));
-                break;
             case OP_5:
-                stack.push(Utiles.intToBytes(5));
-                break;
             case OP_6:
-                stack.push(Utiles.intToBytes(6));
-                break;
             case OP_7:
-                stack.push(Utiles.intToBytes(7));
-                break;
             case OP_8:
-                stack.push(Utiles.intToBytes(8));
-                break;
             case OP_9:
-                stack.push(Utiles.intToBytes(9));
-                break;
             case OP_10:
-                stack.push(Utiles.intToBytes(10));
-                break;
             case OP_11:
-                stack.push(Utiles.intToBytes(11));
-                break;
             case OP_12:
-                stack.push(Utiles.intToBytes(12));
-                break;
             case OP_13:
-                stack.push(Utiles.intToBytes(13));
-                break;
             case OP_14:
-                stack.push(Utiles.intToBytes(14));
-                break;
             case OP_15:
-                stack.push(Utiles.intToBytes(15));
-                break;
             case OP_16:
-                stack.push(Utiles.intToBytes(16));
-                break;
-            case OP_PUSHDATA1:
-                break;
-            case OP_PUSHDATA2:
+                Literales.executeLiteral(opCode, stack);
                 break;
 
 
@@ -273,46 +241,46 @@ public class ScriptInterpreter {
 
             //////////OPERACIONES ARITMÉTICAS///////////
             case OP_ADD:
-                Arithmetic.opAdd(stack);
+                //Arithmetic.opAdd(stack);
                 break;
             case OP_SUB:
-                Arithmetic.opSub(stack);
+                //Arithmetic.opSub(stack);
                 break;
             case OP_NUMEQUALVERIFY:
-                Arithmetic.opNumEqualVerify(stack);
+                //Arithmetic.opNumEqualVerify(stack);
                 break;
             case OP_LESSTHAN:
-                Arithmetic.opLessThan(stack);
+                //Arithmetic.opLessThan(stack);
                 break;
             case OP_GREATERTHAN:
-                Arithmetic.opGreaterThan(stack);
+                //Arithmetic.opGreaterThan(stack);
                 break;
             case OP_LESSTHANOREQUAL:
-                Arithmetic.opLessThanOrEqual(stack);
+                //Arithmetic.opLessThanOrEqual(stack);
                 break;
             case OP_GREATERTHANOREQUAL:
-                Arithmetic.opGreaterThanOrEqual(stack);
+                //Arithmetic.opGreaterThanOrEqual(stack);
                 break;
 
 
             /////////CONTROL DE FLUJO///////////
             case OP_IF:
-                FlowOperations.opIf(stack, stackcondicional);
+                //FlowOperations.opIf(stack, stackcondicional);
                 break;
             case OP_NOTIF:
-                FlowOperations.opNotIf(stack, stackcondicional);
+                //FlowOperations.opNotIf(stack, stackcondicional);
                 break;
             case OP_ELSE:
-                FlowOperations.opElse(stackcondicional);
+                //FlowOperations.opElse(stackcondicional);
                 break;
             case OP_ENDIF:
-                FlowOperations.opEndIf(stackcondicional);
+                //FlowOperations.opEndIf(stackcondicional);
                 break;
             case OP_VERIFY:
-                FlowOperations.opVerify(stack);
+                //FlowOperations.opVerify(stack);
                 break;
             case OP_RETURN:
-                FlowOperations.opReturn();
+                //FlowOperations.opReturn();
                 break;
 
 
@@ -331,15 +299,15 @@ public class ScriptInterpreter {
                 Firmas.opCheckSig(stack);
                 break;
             case OP_CHECKSIGVERIFY:
-                Firmas.opCheckSigVerify(stack);
+                //Firmas.opCheckSigVerify(stack);
                 break;
             
             /////////DESAFÍO EXTRA: MULTISIG///////////
             case OP_CHECKMULTISIG:
-                Firmas.opCheckMultiSig(stack);
+                //Firmas.opCheckMultiSig(stack);
                 break;
             case OP_CHECKMULTISIGVERIFY:
-                Firmas.opCheckMultiSigVerify(stack);
+                //Firmas.opCheckMultiSigVerify(stack);
                 break;
             default:
                 throw new UnsupportedOperationException("Opcode no soportado: " + opCode);

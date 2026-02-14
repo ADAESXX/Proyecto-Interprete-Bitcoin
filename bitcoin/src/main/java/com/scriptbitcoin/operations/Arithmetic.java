@@ -1,8 +1,10 @@
 package com.scriptbitcoin.operations;
 /**
- * @author Paola Merida
- * Fecha:
+ * @author Abigail Escobar
+ * Fecha: 13/02/2026
  * Descripción: Clase que implementa las operaciones aritméticas de Bitcoin Script
+ * 
+ * Estado: pendiente
  *  - OP_ADD: Suma dos elementos de la pila.
  *  - OP_SUB: Resta el segundo elemento de la pila al primero.
  *  - OP_NUMEQUALVERIFY: Compara dos elementos de la pila y verifica si son iguales, si no lo son, el script falla.
