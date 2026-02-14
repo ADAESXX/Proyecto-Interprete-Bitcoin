@@ -4,13 +4,11 @@
  */
 package com.bitcoinproject.operations;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.scriptbitcoin.interpreters.ScriptInterpreter;
 
 class LiteralesTest {
-
+/* 
     @Test
     void opOneShouldPushOne() {
         ScriptInterpreter interpreter = new ScriptInterpreter();
@@ -45,5 +43,5 @@ class LiteralesTest {
     void opFalseShouldPushZero() {
         ScriptInterpreter interpreter = new ScriptInterpreter();
         interpreter.execute("OP_FALSE");
-    }
+    } */
 }

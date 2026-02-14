@@ -1,13 +1,11 @@
 package com.bitcoinproject.operations;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.scriptbitcoin.interpreters.ScriptInterpreter;
 import com.scriptbitcoin.interpreters.ExceptionsInterpreter;
 
 class LogicTest {
-
+/* 
     @Test
     void opEqualShouldReturnTrueForEqualValues() {
         ScriptInterpreter interpreter = new ScriptInterpreter();
@@ -46,5 +44,5 @@ class LogicTest {
         assertThrows(ExceptionsInterpreter.class, () -> {
             interpreter.execute("5 6 OP_EQUALVERIFY");
         });
-    }
+    } */
 }

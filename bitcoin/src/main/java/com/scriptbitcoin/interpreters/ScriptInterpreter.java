@@ -84,6 +84,10 @@ public class ScriptInterpreter {
             if (stack.isEmpty()){
                 return new ScriptResult(false, "Error: pila vacía", stack);
             }
+            //temporal//////////////////////////
+            byte[] top = stack.peek();
+            System.out.println("DEBUG top int = " + Utiles.bytesToInt(top));
+
             if (!Utiles.isTruthy(stack.peek())){
                 return new ScriptResult(false, "Cima del stack falsa", stack);
             }

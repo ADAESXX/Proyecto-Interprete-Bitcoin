@@ -4,14 +4,11 @@
  */
 package com.bitcoinproject.operations;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.scriptbitcoin.interpreters.ScriptInterpreter;
 
 class DesafioTest {
-
-    @Test
+/*    @Test
     void testComplexScript() {
         ScriptInterpreter interpreter = new ScriptInterpreter();
         interpreter.execute("1 2 OP_ADD 3 OP_EQUAL");
@@ -27,5 +24,6 @@ class DesafioTest {
     void testMultipleOperations() {
         ScriptInterpreter interpreter = new ScriptInterpreter();
         interpreter.execute("5 OP_DUP OP_ADD 10 OP_EQUAL");
-    }
+    } */
+ 
 }

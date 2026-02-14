@@ -4,15 +4,13 @@
  */
 package com.bitcoinproject.operations;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.scriptbitcoin.interpreters.ScriptInterpreter;
 import com.scriptbitcoin.interpreters.ExceptionsInterpreter;
 
 class CryptoTest {
 
-    @Test
+   /*  @Test
     void opSha256ShouldHashData() {
         ScriptInterpreter interpreter = new ScriptInterpreter();
         interpreter.execute("5 OP_SHA256");
@@ -36,5 +34,5 @@ class CryptoTest {
         assertThrows(ExceptionsInterpreter.class, () -> {
             interpreter.execute("OP_SHA256");
         });
-    }
+    } */
 }

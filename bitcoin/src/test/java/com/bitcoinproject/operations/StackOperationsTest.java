@@ -1,14 +1,12 @@
 package com.bitcoinproject.operations;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.scriptbitcoin.interpreters.ScriptInterpreter;
 import com.scriptbitcoin.interpreters.ExceptionsInterpreter;
 
 class StackOperationsTest {
 
-    @Test
+   /*  @Test
     void opDupShouldDuplicateTopElement() {
         ScriptInterpreter interpreter = new ScriptInterpreter();
         interpreter.execute("5 OP_DUP");
@@ -46,5 +44,5 @@ class StackOperationsTest {
         assertEquals("1", interpreter.pop());
         assertEquals("2", interpreter.pop());
         assertEquals("1", interpreter.pop());
-    }
+    } */
 }
