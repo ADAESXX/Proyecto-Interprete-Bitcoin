@@ -19,12 +19,26 @@ public class Main {
 
         String scriptString;
         boolean traceEnabled = false;
-
+        System.out.println("=== ARGS RECEIVED ===");
+        System.out.println("Total args: " + args.length);
+        for (int i = 0; i < args.length; i++) {
+            System.out.println("  args[" + i + "] = '" + args[i] + "'");
+        }
+        
+        if (args.length < 1) {
+            System.out.println("No arguments provided!");
+            return;
+        }
+    
+        scriptString = String.join(" ", args);
+        System.out.println("Script string: '" + scriptString + "'");
+        System.out.println("Script length: " + scriptString.length());
+        System.out.println("====================");
+    
         
         ///////////// Ejemplo de uso especificado en la guía
         if (args.length < 1) {
             System.out.println("Uso de --trace para registrar la ejecución paso a paso.");
-            System.out.println("Ejemplo:  \"1 2 OP_ADD 5 OP_GREATERTHAN\"");
             System.exit(1);
             return;
         }
@@ -36,7 +50,6 @@ public class Main {
         else {
             scriptString = args[0];
         } */
-       scriptString = args[0];
 
         for (int i = 1; i < args.length; i++) {
             if ("--trace".equals(args[i])) {

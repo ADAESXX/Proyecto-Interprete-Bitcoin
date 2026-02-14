@@ -1,0 +1,9 @@
+com\bitcoinproject\operations\CryptoTest.class
+com\bitcoinproject\operations\FlowOperationsTest.class
+com\bitcoinproject\operations\StackOperationsTest.class
+com\bitcoinproject\operations\ScriptException.class
+com\bitcoinproject\operations\ArithmeticTest.class
+com\bitcoinproject\operations\FirmasTest.class
+com\bitcoinproject\operations\LiteralesTest.class
+com\bitcoinproject\operations\DesafioTest.class
+com\bitcoinproject\operations\LogicTest.class

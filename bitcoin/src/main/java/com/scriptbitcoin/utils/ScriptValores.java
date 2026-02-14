@@ -1,5 +1,8 @@
 package com.scriptbitcoin.utils;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.scriptbitcoin.model.OpCode;
 import com.scriptbitcoin.model.Valor;
@@ -38,10 +41,27 @@ public class ScriptValores {
 
         String[] parts = script.trim().split("\\s+");
 
-        for (String part : parts) {
-            Valor token = parseToken(part);
-            tokens.add(token);
+        System.out.println("=== TOKENIZE DEBUG ===");
+        System.out.println("Input script: '" + script + "'");
+        System.out.println("Split into " + parts.length + " parts:");
+        for (int i = 0; i < parts.length; i++) {
+            System.out.println("  parts[" + i + "] = '" + parts[i] + "'");
         }
+        System.out.println("======================");
+
+        for (String part : parts) {
+            try {
+                System.out.println("Parsing part: '" + part + "'"); // ADD THIS
+                Valor token = parseToken(part);
+                System.out.println("  -> Created token: " + token); // ADD THIS
+                tokens.add(token);
+            } catch (Exception e) {
+                System.out.println("  -> ERROR: " + e.getMessage()); // ADD THIS
+                e.printStackTrace();
+            }
+        }
+        
+        System.out.println("Total tokens created: " + tokens.size());
 
         return tokens;
     }
@@ -79,7 +99,14 @@ public class ScriptValores {
                 // No es hex valido
             }
         }
-
+        if (part.matches("[0-9a-fA-F]+")) {
+            try {
+                byte[] hexData = hexToBytes(part);
+                return new Valor(hexData);
+            } catch (IllegalArgumentException e) {
+                // No es hex valido, continuar
+            }
+        }
         throw new IllegalArgumentException("Token no reconocido: " + part);
     }
 

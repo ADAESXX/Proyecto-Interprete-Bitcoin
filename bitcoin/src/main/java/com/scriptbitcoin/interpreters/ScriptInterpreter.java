@@ -5,6 +5,7 @@ package com.scriptbitcoin.interpreters;
  * Descripcion: clase encargada de evaluar los scripts de bitcoin
  */
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 
@@ -51,7 +52,14 @@ public class ScriptInterpreter {
         // Inicializar el logger de trace si el modo trace está habil
         traceLogger = trace ? new TraceAplication() : null;
 
-        
+          // ADD THIS DEBUG
+    System.out.println("=== EXECUTING SCRIPT ===");
+    System.out.println("Total tokens: " + valores.size());
+    for (int i = 0; i < valores.size(); i++) {
+        System.out.println("Token[" + i + "]: " + valores.get(i) + " (type: " + valores.get(i).getType() + ")");
+    }
+    System.out.println("=======================");
+    
         try {
             // Ejecutar cada valor del script
             for (int i = 0; i < valores.size(); i++) {
@@ -84,10 +92,15 @@ public class ScriptInterpreter {
             if (stack.isEmpty()){
                 return new ScriptResult(false, "Error: pila vacía", stack);
             }
-            //temporal//////////////////////////
-            byte[] top = stack.peek();
-            System.out.println("DEBUG top int = " + Utiles.bytesToInt(top));
 
+            System.out.println("=== FINAL STACK DEBUG ===");
+            System.out.println("Stack size: " + stack.size());
+            int index = 0;
+            for (byte[] element : stack) {
+                System.out.println("Stack[" + index + "] = " + Arrays.toString(element) + " -> int: " + Utiles.bytesToInt(element));
+                index++;
+            }
+            
             if (!Utiles.isTruthy(stack.peek())){
                 return new ScriptResult(false, "Cima del stack falsa", stack);
             }

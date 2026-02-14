@@ -47,10 +47,6 @@ public class Arithmetic {
         }
         int b = Utiles.bytesToInt(stack.pop());
         int a = Utiles.bytesToInt(stack.pop());
-        System.out.println("Arithmetic class loaded from: " 
-    + Arithmetic.class.getProtectionDomain()
-                      .getCodeSource()
-                      .getLocation());
         int result = (a > b) ? 1 : 0;
         stack.push(Utiles.intToBytes(result));
     }
