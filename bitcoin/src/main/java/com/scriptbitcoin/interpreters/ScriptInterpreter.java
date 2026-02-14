@@ -11,6 +11,7 @@ import java.util.List;
 import com.scriptbitcoin.model.OpCode;
 import com.scriptbitcoin.model.Valor;
 import com.scriptbitcoin.model.ValorTipo;
+import com.scriptbitcoin.operations.Arithmetic;
 import com.scriptbitcoin.operations.Crypto;
 import com.scriptbitcoin.operations.Firmas;
 import com.scriptbitcoin.operations.Literales;
@@ -241,7 +242,7 @@ public class ScriptInterpreter {
 
             //////////OPERACIONES ARITMÉTICAS///////////
             case OP_ADD:
-                //Arithmetic.opAdd(stack);
+                Arithmetic.opAdd(stack);
                 break;
             case OP_SUB:
                 //Arithmetic.opSub(stack);
@@ -253,7 +254,7 @@ public class ScriptInterpreter {
                 //Arithmetic.opLessThan(stack);
                 break;
             case OP_GREATERTHAN:
-                //Arithmetic.opGreaterThan(stack);
+                Arithmetic.opGreaterThan(stack);
                 break;
             case OP_LESSTHANOREQUAL:
                 //Arithmetic.opLessThanOrEqual(stack);
@@ -284,7 +285,7 @@ public class ScriptInterpreter {
                 break;
 
 
-            //////////////CRIPTOGRAFÍA///////////
+            //////////////CRIPTOGRAFIA///////////
             case OP_SHA256:
                 Crypto.opSha256(stack);
                 break;
@@ -302,7 +303,7 @@ public class ScriptInterpreter {
                 //Firmas.opCheckSigVerify(stack);
                 break;
             
-            /////////DESAFÍO EXTRA: MULTISIG///////////
+            /////////DESAFIO EXTRA: MULTISIG///////////
             case OP_CHECKMULTISIG:
                 //Firmas.opCheckMultiSig(stack);
                 break;

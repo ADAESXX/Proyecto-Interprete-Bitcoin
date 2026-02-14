@@ -23,7 +23,7 @@ public class Main {
         
         ///////////// Ejemplo de uso especificado en la guía
         if (args.length < 1) {
-            System.out.println("Uso de --trace para re");
+            System.out.println("Uso de --trace para registrar la ejecución paso a paso.");
             System.out.println("Ejemplo:  \"1 2 OP_ADD 5 OP_GREATERTHAN\"");
             System.exit(1);
             return;
