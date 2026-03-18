@@ -11,5 +11,6 @@ Esto es útil para ver si algo falla y ver exactamente cuál es ese error, tambi
 # Compilar/ejecutar
 Para correrlo en la terminal escribir:
 mvn compile
+
 mvn exec:java "-Dexec.mainClass=com.scriptbitcoin.Main" "-Dexec.args=3 4 OP_ADD 7 OP_EQUAL --trace"
 (3 4 OP_ADD 7 OP_EQUAL solo es un ejemplo)
