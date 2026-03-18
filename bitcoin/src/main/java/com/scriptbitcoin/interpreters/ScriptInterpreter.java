@@ -14,7 +14,9 @@ import com.scriptbitcoin.model.Valor;
 import com.scriptbitcoin.model.ValorTipo;
 import com.scriptbitcoin.operations.Arithmetic;
 import com.scriptbitcoin.operations.Crypto;
+import com.scriptbitcoin.operations.Desafio;
 import com.scriptbitcoin.operations.Firmas;
+import com.scriptbitcoin.operations.FlowOperations;
 import com.scriptbitcoin.operations.Literales;
 import com.scriptbitcoin.operations.Logic;
 import com.scriptbitcoin.operations.StackOperations;
@@ -262,43 +264,43 @@ public class ScriptInterpreter {
                 Arithmetic.opAdd(stack);
                 break;
             case OP_SUB:
-                //Arithmetic.opSub(stack);
+                Arithmetic.opSub(stack);
                 break;
             case OP_NUMEQUALVERIFY:
-                //Arithmetic.opNumEqualVerify(stack);
+                Arithmetic.opNumEqualVerify(stack);
                 break;
             case OP_LESSTHAN:
-                //Arithmetic.opLessThan(stack);
+                Arithmetic.opLessThan(stack);
                 break;
             case OP_GREATERTHAN:
                 Arithmetic.opGreaterThan(stack);
                 break;
             case OP_LESSTHANOREQUAL:
-                //Arithmetic.opLessThanOrEqual(stack);
+                Arithmetic.opLessThanOrEqual(stack);
                 break;
             case OP_GREATERTHANOREQUAL:
-                //Arithmetic.opGreaterThanOrEqual(stack);
+                Arithmetic.opGreaterThanOrEqual(stack);
                 break;
 
 
             /////////CONTROL DE FLUJO///////////
             case OP_IF:
-                //FlowOperations.opIf(stack, stackcondicional);
+                FlowOperations.opIf(stack, stackcondicional);
                 break;
             case OP_NOTIF:
-                //FlowOperations.opNotIf(stack, stackcondicional);
+                FlowOperations.opNotIf(stack, stackcondicional);
                 break;
             case OP_ELSE:
-                //FlowOperations.opElse(stackcondicional);
+                FlowOperations.opElse(stackcondicional);
                 break;
             case OP_ENDIF:
-                //FlowOperations.opEndIf(stackcondicional);
+                FlowOperations.opEndIf(stackcondicional);
                 break;
             case OP_VERIFY:
-                //FlowOperations.opVerify(stack);
+                FlowOperations.opVerify(stack);
                 break;
             case OP_RETURN:
-                //FlowOperations.opReturn();
+                FlowOperations.opReturn();
                 break;
 
 
@@ -317,15 +319,15 @@ public class ScriptInterpreter {
                 Firmas.opCheckSig(stack);
                 break;
             case OP_CHECKSIGVERIFY:
-                //Firmas.opCheckSigVerify(stack);
+                Firmas.opCheckSigVerify(stack);
                 break;
             
             /////////DESAFIO EXTRA: MULTISIG///////////
             case OP_CHECKMULTISIG:
-                //Firmas.opCheckMultiSig(stack);
+                Desafio.opCheckMultiSig(stack);
                 break;
             case OP_CHECKMULTISIGVERIFY:
-                //Firmas.opCheckMultiSigVerify(stack);
+                Desafio.opCheckMultiSigVerify(stack);
                 break;
             default:
                 throw new UnsupportedOperationException("Opcode no soportado: " + opCode);

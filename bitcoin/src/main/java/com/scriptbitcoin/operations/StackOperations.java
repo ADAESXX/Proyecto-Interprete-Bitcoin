@@ -8,6 +8,7 @@ import com.scriptbitcoin.interpreters.ExceptionsInterpreter;
 /**
  * @author Abigail Escobar
  * Fecha: 13/02/2026
+ * Estado: completa
  * Descripción: Implementa las operaciones de manipulación de la pila de Bitcoin Script:
  *  - OP_DUP: Duplica el elemento superior de la pila.
  *  - OP_DROP: Elimina el elemento superior de la pila. 

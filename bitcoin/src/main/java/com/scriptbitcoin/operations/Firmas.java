@@ -9,12 +9,11 @@ import com.scriptbitcoin.utils.Utiles;
 
 /**
  * @author Abigail Escobar
- * Fecha:
+ * Fecha de modificacion: 17/03/2026
+ * Estado: completa
  * Descripción: Implementa las operaciones de firma de Bitcoin Script:
  *  - OP_CHECKSIG: Verifica que la firma proporcionada corresponde a la clave pública y al mensaje.
  *  - OP_CHECKSIGVERIFY: Verifica que la firma proporcionada corresponde a la clave pública
- * 
- * Estado: en proceso, falta  implementar OP_CHECKSIGVERIFY
  */
 public class Firmas {
     /**
@@ -52,7 +51,7 @@ public class Firmas {
      * Empuja 1 si la firma es valida, 0 si no.
      *
      * @param stack la pila principal
-     * @throws InterpreterException si la pila tiene menos de 2 elementos
+     * @throws ExceptionsInterpreter si la pila tiene menos de 2 elementos
      */
     public static void opCheckSig(Deque<byte[]> stack) {
         if (stack.size() < 2) {
@@ -63,6 +62,26 @@ public class Firmas {
         boolean valid = mockVerify(sig, pubKey);
         stack.push(valid ? Utiles.intToBytes(1) : new byte[0]);
     }
+
+
+    /**
+     * OP_CHECKSIGVERIFY: Igual que OP_CHECKSIG seguido de OP_VERIFY.
+     * Si la firma no es valida, falla el script inmediatamente.
+     *
+     * @param stack la pila principal
+     * @throws ExceptionsInterpreter si firma invalida o pila insuficiente
+     */
+    public static void opCheckSigVerify(Deque<byte[]> stack) {
+        if (stack.size() < 2) {
+            throw new ExceptionsInterpreter("OP_CHECKSIGVERIFY: se necesitan al menos 2 elementos");
+        }
+        byte[] pubKey = stack.pop();
+        byte[] sig = stack.pop();
+        if (!mockVerify(sig, pubKey)) {
+            throw new ExceptionsInterpreter("OP_CHECKSIGVERIFY: firma invalida");
+        }
+    }
+
 
     /**
      * Verifica una firma contra una clave publica usando el almacen mock.

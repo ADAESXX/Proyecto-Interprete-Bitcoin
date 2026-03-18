@@ -8,7 +8,7 @@ import com.scriptbitcoin.utils.Utiles;
 
 /**
  * @author Abigail Escobar
- * Fecha:
+ * Fecha: 
  * Descripción: implementa las operaciones lógicas de Bitcoin Script y comparacación de datos:
  *  -OP_EQUAL: Compara dos elementos de la pila y verifica si son iguales, si no lo son, el script falla.
  *  -OP_EQUALVERIFY: Compara dos elementos de la pila y verifica si son iguales, si no lo son, el script falla.

@@ -7,13 +7,13 @@ import com.scriptbitcoin.interpreters.ExceptionsInterpreter;
 
 /**
  * @author Abigail Escobar
- * Fecha:
+ * Fecha: 17/03/2026
+ * Estado: completa
  * Descripción: Clase que implementa las operaciones criptográficas de Bitcoin Script
  *  - OP_HASH160: Aplica la función hash RIPEMD-160 al resultado de la función hash SHA-256 del elemento superior de la pila.
  *  - OP_HASH256: Aplica la función hash SHA-256 dos veces al elemento superior de la pila.
  *  - OP_SHA256: Aplica la función hash SHA-256 al elemento superior de la pila.
  * 
- * Estado: completa
  */
 public class Crypto {
     private Crypto() {
@@ -65,6 +65,8 @@ public class Crypto {
         stack.push(hashed);
     }
 
+
+    /////simulaciones para simular el funcionamiento de los hash
     /**
      * Simulacion de SHA-256. Prefija "SHA256:" al dato de entrada.
      * Esto produce un hash determinista y verificable para pruebas.
