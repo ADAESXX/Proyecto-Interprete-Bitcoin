@@ -5,7 +5,10 @@ import java.util.List;
 import com.scriptbitcoin.interpreters.ScriptInterpreter;
 import com.scriptbitcoin.interpreters.ScriptResult;
 import com.scriptbitcoin.model.Valor;
+import com.scriptbitcoin.operations.Desafio;
+import com.scriptbitcoin.operations.Firmas;
 import com.scriptbitcoin.utils.ScriptValores;
+import com.scriptbitcoin.utils.Utiles;
 
 /**
  * @author Abigail Escobar
@@ -30,7 +33,16 @@ public class Main {
             return;
         }
     
-        scriptString = String.join(" ", args);
+        StringBuilder scriptBuilder = new StringBuilder();
+
+        for (String arg : args) {
+            if (!arg.equals("--trace")) {
+                scriptBuilder.append(arg).append(" ");
+            }
+        }
+
+        scriptString = scriptBuilder.toString().trim();
+
         System.out.println("Script string: '" + scriptString + "'");
         System.out.println("Script length: " + scriptString.length());
         System.out.println("====================");
@@ -42,14 +54,7 @@ public class Main {
             System.exit(1);
             return;
         }
-        //Ejemplo funcional creado con chat :)
-        /* if (args.length < 1) {
-            scriptString = "3 4 OP_ADD 7 OP_EQUAL";
-            System.out.println("Ejecutando ejemplo por defecto: " + scriptString);
-        } 
-        else {
-            scriptString = args[0];
-        } */
+        
 
         for (int i = 1; i < args.length; i++) {
             if ("--trace".equals(args[i])) {
@@ -62,6 +67,23 @@ public class Main {
             ScriptValores tokenizer = new ScriptValores();
             List<Valor> tokens = tokenizer.tokenize(scriptString);
 
+            Firmas.clearSignatures();
+            Firmas.registerValidSignature(
+                Utiles.intToBytes(7),
+                Utiles.intToBytes(7)
+            );
+
+            Desafio.clearSignatures();
+
+            Desafio.registerValidSignature(
+                Utiles.intToBytes(1),
+                Utiles.intToBytes(1)
+            );
+
+            Desafio.registerValidSignature(
+                Utiles.intToBytes(2),
+                Utiles.intToBytes(2)
+            );
             // Ejecutar el script
             ScriptInterpreter interpreter = new ScriptInterpreter();
             ScriptResult result = interpreter.execute(tokens, traceEnabled);

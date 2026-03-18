@@ -55,9 +55,9 @@ public class ScriptValores {
                 Valor token = parseToken(part);
                 System.out.println("  -> Created token: " + token); // ADD THIS
                 tokens.add(token);
-            } catch (Exception e) {
-                System.out.println("  -> ERROR: " + e.getMessage()); // ADD THIS
-                e.printStackTrace();
+            } 
+            catch (Exception e) {
+                throw new IllegalArgumentException("Token no reconocido: " + part);
             }
         }
         

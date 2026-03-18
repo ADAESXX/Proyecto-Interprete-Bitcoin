@@ -30,6 +30,7 @@ public class Desafio {
     public static void registerValidSignature(byte[] signature, byte[] pubKey) {
         String key = Utiles.bytesToHex(signature) + ":" + Utiles.bytesToHex(pubKey);
         mockValidSignatures.put(key, "valid");
+        System.out.println("Registered: " + key);
     }
 
     /**
@@ -116,6 +117,7 @@ public class Desafio {
      */
     private static boolean mockVerify(byte[] sig, byte[] pubKey) {
         String key = Utiles.bytesToHex(sig) + ":" + Utiles.bytesToHex(pubKey);
+        System.out.println("Checking: " + key);
         return mockValidSignatures.containsKey(key);
     }
 
