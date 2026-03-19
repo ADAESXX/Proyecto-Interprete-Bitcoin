@@ -17,6 +17,6 @@ mvn exec:java "-Dexec.mainClass=com.scriptbitcoin.Main" "-Dexec.args=3 4 OP_ADD 
 
 Para compilar archivos test
 
- mvn clean compile 
+ mvn clean compile:
  
  mvn test
