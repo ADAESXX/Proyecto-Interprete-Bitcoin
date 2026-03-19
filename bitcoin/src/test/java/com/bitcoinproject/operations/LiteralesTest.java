@@ -1,47 +1,53 @@
-/**
- * @author Paola Merida
- * Fecha: 12/02/2026
- */
 package com.bitcoinproject.operations;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-import com.scriptbitcoin.interpreters.ScriptInterpreter;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import org.junit.Before;
+import org.junit.Test;
 
-class LiteralesTest {
-/* 
-    @Test
-    void opOneShouldPushOne() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("OP_1");
-        assertEquals("1", interpreter.pop());
+import com.scriptbitcoin.model.OpCode;
+import com.scriptbitcoin.operations.Literales;
+import com.scriptbitcoin.utils.Utiles;
+
+public class LiteralesTest {
+
+    private Deque<byte[]> stack;
+
+    @Before
+    public void setup() {
+        stack = new ArrayDeque<>();
     }
 
     @Test
-    void opTwoShouldPushTwo() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("OP_2");
-        assertEquals("2", interpreter.pop());
+    public void testOp0() {
+        Literales.executeLiteral(OpCode.OP_0, stack);
+        assertFalse(Utiles.isTruthy(stack.peek()));
     }
 
     @Test
-    void opZeroShouldPushZero() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("OP_0");
-        assertEquals("0", interpreter.pop());
+    public void testOp1() {
+        Literales.executeLiteral(OpCode.OP_1, stack);
+        assertEquals(1, Utiles.bytesToInt(stack.peek()));
     }
 
     @Test
-    void numberLiteralsShouldBePushed() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("5 10 15");
-        assertEquals("15", interpreter.pop());
-        assertEquals("10", interpreter.pop());
-        assertEquals("5", interpreter.pop());
+    public void testOp16() {
+        Literales.executeLiteral(OpCode.OP_16, stack);
+        assertEquals(16, Utiles.bytesToInt(stack.peek()));
     }
 
     @Test
-    void opFalseShouldPushZero() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("OP_FALSE");
-    } */
+    public void testLiteralInvalido() {
+        try {
+            Literales.executeLiteral(null, stack);
+            fail("Debió lanzar excepción");
+        } catch (Exception e) {
+            assertTrue(true);
+        }
+    }
 }

@@ -1,48 +1,76 @@
 package com.bitcoinproject.operations;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-import com.scriptbitcoin.interpreters.ScriptInterpreter;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.scriptbitcoin.interpreters.ExceptionsInterpreter;
+import com.scriptbitcoin.operations.Logic;
+import com.scriptbitcoin.utils.Utiles;
 
-class LogicTest {
-/* 
-    @Test
-    void opEqualShouldReturnTrueForEqualValues() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("5 5 OP_EQUAL");
+public class LogicTest {
+
+    private Deque<byte[]> stack;
+
+    @Before
+    public void setup() {
+        stack = new ArrayDeque<>();
     }
 
     @Test
-    void opEqualShouldReturnFalseForDifferentValues() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        assertThrows(ExceptionsInterpreter.class, () -> {
-            interpreter.execute("5 6 OP_EQUAL");
-        });
+    public void testOpEqual_True() {
+        stack.push(Utiles.intToBytes(5));
+        stack.push(Utiles.intToBytes(5));
+        Logic.opEqual(stack);
+        assertEquals(1, Utiles.bytesToInt(stack.peek()));
     }
 
     @Test
-    void opNotShouldInvertTruthValue() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("0 OP_NOT");
+    public void testOpEqual_False() {
+        stack.push(Utiles.intToBytes(5));
+        stack.push(Utiles.intToBytes(6));
+        Logic.opEqual(stack);
+        assertFalse(Utiles.isTruthy(stack.peek()));
     }
 
     @Test
-    void opBoolAndShouldReturnTrueForBothTrue() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("1 1 OP_BOOLAND");
+    public void testOpEqualVerify_Falla() {
+        stack.push(Utiles.intToBytes(5));
+        stack.push(Utiles.intToBytes(6));
+        try {
+            Logic.opEqualVerify(stack);
+            fail("Debió lanzar excepción");
+        } catch (ExceptionsInterpreter e) {
+            assertTrue(e.getMessage().contains("OP_EQUALVERIFY"));
+        }
     }
 
     @Test
-    void opBoolOrShouldReturnTrueForEitherTrue() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("1 0 OP_BOOLOR");
+    public void testOpNot() {
+        stack.push(new byte[0]);
+        Logic.opNot(stack);
+        assertEquals(1, Utiles.bytesToInt(stack.peek()));
     }
 
     @Test
-    void opEqualVerifyShouldFailOnUnequalValues() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        assertThrows(ExceptionsInterpreter.class, () -> {
-            interpreter.execute("5 6 OP_EQUALVERIFY");
-        });
-    } */
+    public void testOpBoolAnd() {
+        stack.push(Utiles.intToBytes(1));
+        stack.push(Utiles.intToBytes(1));
+        Logic.opBoolAnd(stack);
+        assertEquals(1, Utiles.bytesToInt(stack.peek()));
+    }
+
+    @Test
+    public void testOpBoolOr() {
+        stack.push(new byte[0]);
+        stack.push(Utiles.intToBytes(1));
+        Logic.opBoolOr(stack);
+        assertEquals(1, Utiles.bytesToInt(stack.peek()));
+    }
 }

@@ -1,48 +1,64 @@
 package com.bitcoinproject.operations;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-import com.scriptbitcoin.interpreters.ScriptInterpreter;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.scriptbitcoin.interpreters.ExceptionsInterpreter;
+import com.scriptbitcoin.operations.StackOperations;
+import com.scriptbitcoin.utils.Utiles;
 
-class StackOperationsTest {
+public class StackOperationsTest {
 
-   /*  @Test
-    void opDupShouldDuplicateTopElement() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("5 OP_DUP");
-        assertEquals("5", interpreter.pop());
-        assertEquals("5", interpreter.pop());
+    private Deque<byte[]> stack;
+
+    @Before
+    public void setup() {
+        stack = new ArrayDeque<>();
     }
 
     @Test
-    void opDropShouldRemoveTopElement() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("5 6 OP_DROP");
-        assertEquals("5", interpreter.pop());
+    public void testOpDup() {
+        stack.push(Utiles.intToBytes(5));
+        StackOperations.opDup(stack);
+        assertEquals(2, stack.size());
     }
 
     @Test
-    void opDupShouldFailOnEmptyStack() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        assertThrows(ExceptionsInterpreter.class, () -> {
-            interpreter.execute("OP_DUP");
-        });
+    public void testOpDup_PilaVacia() {
+        try {
+            StackOperations.opDup(stack);
+            fail("Debió lanzar excepción OP_DUP");
+        } catch (ExceptionsInterpreter e) {
+            assertTrue(e.getMessage().contains("OP_DUP"));
+        }
     }
 
     @Test
-    void opSwapShouldExchangeTopElements() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("3 5 OP_SWAP");
-        assertEquals("3", interpreter.pop());
-        assertEquals("5", interpreter.pop());
+    public void testOpDrop() {
+        stack.push(Utiles.intToBytes(5));
+        StackOperations.opDrop(stack);
+        assertEquals(0, stack.size());
     }
 
     @Test
-    void opOverShouldDuplicateSecondElement() {
-        ScriptInterpreter interpreter = new ScriptInterpreter();
-        interpreter.execute("1 2 OP_OVER");
-        assertEquals("1", interpreter.pop());
-        assertEquals("2", interpreter.pop());
-        assertEquals("1", interpreter.pop());
-    } */
+    public void testOpSwap() {
+        stack.push(Utiles.intToBytes(3));
+        stack.push(Utiles.intToBytes(5));
+        StackOperations.opSwap(stack);
+        assertEquals(3, Utiles.bytesToInt(stack.pop()));
+    }
+
+    @Test
+    public void testOpOver() {
+        stack.push(Utiles.intToBytes(1));
+        stack.push(Utiles.intToBytes(2));
+        StackOperations.opOver(stack);
+        assertEquals(3, stack.size());
+    }
 }
