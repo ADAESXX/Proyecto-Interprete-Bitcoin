@@ -14,3 +14,7 @@ mvn compile
 
 mvn exec:java "-Dexec.mainClass=com.scriptbitcoin.Main" "-Dexec.args=3 4 OP_ADD 7 OP_EQUAL --trace"
 (3 4 OP_ADD 7 OP_EQUAL solo es un ejemplo)
+
+Para compilar archivos test
+ mvn clean compile 
+ mvn test
